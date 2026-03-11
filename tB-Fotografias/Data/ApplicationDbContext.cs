@@ -8,5 +8,7 @@ namespace tB_Fotografias.Data
     {
         public DbSet<MyUser> MyUsers { get; set; }
         public DbSet<Purchase> Purchases { get; set; } 
+        public DbSet<Photography> Photographies { get; set; }
+        public DbSet<Category> Categories { get; set; }
     }
 }
