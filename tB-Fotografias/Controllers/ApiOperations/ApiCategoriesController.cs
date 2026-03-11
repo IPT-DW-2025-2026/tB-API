@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using tB_Fotografias.Data;
 using tB_Fotografias.Models;
+using tB_Fotografias.Models.Api;
 
 namespace tB_Fotografias.Controllers.ApiOperations
 {
@@ -76,7 +77,7 @@ namespace tB_Fotografias.Controllers.ApiOperations
         // POST: api/ApiCategories
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Category>> PostCategory(Category category)
+        public async Task<ActionResult<Category>> PostCategory(CategoryDto category)
         {
             // validar se a categoria já existe
             var categoriaExists = _context.Categories.FirstOrDefault(c => c.Name.Equals(category.Name));
@@ -85,10 +86,11 @@ namespace tB_Fotografias.Controllers.ApiOperations
                 return BadRequest("Categoria com este Name já existe");
             }
 
-            _context.Categories.Add(category);
+            var categoryEntry = new Category() { Name = category.Name };
+            _context.Categories.Add(categoryEntry);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetCategory", new { id = category.Id }, category);
+            return CreatedAtAction("GetCategory", new { id = categoryEntry.Id }, categoryEntry);
         }
 
         // DELETE: api/ApiCategories/5

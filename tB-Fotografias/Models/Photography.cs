@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace tB_Fotografias.Models
 {
@@ -64,6 +65,7 @@ namespace tB_Fotografias.Models
         /// <summary>
         /// List of purchases where the photo was purchased
         /// </summary>
+        [JsonIgnore]
         public ICollection<Purchase> ListofPurchases { get; set; } = [];
 
     }
