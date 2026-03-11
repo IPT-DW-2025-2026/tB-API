@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using tB_Fotografias.Data;
 
@@ -11,9 +12,11 @@ using tB_Fotografias.Data;
 namespace tB_Fotografias.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260311102603_ModeloInicialBD")]
+    partial class ModeloInicialBD
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -238,7 +241,7 @@ namespace tB_Fotografias.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories", (string)null);
+                    b.ToTable("Categories");
                 });
 
             modelBuilder.Entity("tB_Fotografias.Models.MyUser", b =>
@@ -275,7 +278,7 @@ namespace tB_Fotografias.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("MyUsers", (string)null);
+                    b.ToTable("MyUsers");
                 });
 
             modelBuilder.Entity("tB_Fotografias.Models.Photography", b =>
@@ -306,7 +309,7 @@ namespace tB_Fotografias.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Photographies", (string)null);
+                    b.ToTable("Photographies");
                 });
 
             modelBuilder.Entity("tB_Fotografias.Models.Purchase", b =>
@@ -325,7 +328,7 @@ namespace tB_Fotografias.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Purchases", (string)null);
+                    b.ToTable("Purchases");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
