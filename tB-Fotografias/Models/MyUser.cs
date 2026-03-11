@@ -40,5 +40,15 @@
         /// </summary>
         public string CellPhone { get; set; } = string.Empty;
 
+
+        /*  ************************************** 
+        *  Relationship
+        *  1-N
+        *  ************************************** */
+        /// <summary>
+        /// List of purchases made by this user
+        /// </summary>
+        public ICollection<Purchase> ListOfPurchases { get; set; } = [];
+
     }
 }

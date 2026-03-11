@@ -1,4 +1,6 @@
 ﻿using Mono.TextTemplating;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace tB_Fotografias.Models
 {
@@ -21,6 +23,32 @@ namespace tB_Fotografias.Models
         /// Estado da compra
         /// </summary>
         public State State { get; set; }
+
+        /*  ************************************** 
+        *  Relationship
+        *  1-N
+        *  ************************************** */
+
+        /// <summary>
+        /// FK to the buyer of the purchase
+        /// </summary>
+        [ForeignKey(nameof(Buyer))]
+        [Display(Name = "Cliente")]
+        public int BuyerFK { get; set; }
+
+        /// <summary>
+        /// FK to the buyer of the purchase
+        /// </summary>
+        public MyUser Buyer { get; set; }
+
+        /*  ************************************** 
+        *  Relationship
+        *  M-N
+        *  ************************************** */
+        /// <summary>
+        /// List of purchases where the photo was purchased
+        /// </summary>
+        public ICollection<Photography> ListofPhotos { get; set; } = [];
     }
 
     public enum State

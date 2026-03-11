@@ -1,4 +1,7 @@
-﻿namespace tB_Fotografias.Models
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace tB_Fotografias.Models
 {
     /// <summary>
     /// Fotografias que podem ser vendidas, e que pertencem a uma categoria
@@ -34,6 +37,34 @@
         /// Preço de compra da Fotografia
         /// </summary> 
         public decimal Price { get; set; }
+
+
+        /*  ************************************** 
+         *  Relationships
+         *  1-N
+         *  ************************************** */
+
+        /// <summary>
+        /// FK to Category of Photo
+        /// </summary>
+        [ForeignKey(nameof(Category))]
+        [Display(Name = "Categoria")]
+        public int CategoryFK { get; set; }
+        
+        
+        /// <summary>
+        /// FK to Category of Photo
+        /// </summary>
+        public Category Category { get; set; } = null!;
+
+        /*  ************************************** 
+        *  Relationship
+        *  M-N
+        *  ************************************** */
+        /// <summary>
+        /// List of purchases where the photo was purchased
+        /// </summary>
+        public ICollection<Purchase> ListofPurchases { get; set; } = [];
 
     }
 }

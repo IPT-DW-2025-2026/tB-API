@@ -19,5 +19,14 @@ namespace tB_Fotografias.Models
         [Required(ErrorMessage = "A {0} é de preenchimento obrigatório.")]
         [StringLength(32, ErrorMessage = "A {0} deve ter um máximo de {1} caracteres.")]
         public string Name { get; set; } = string.Empty;
+
+        /*  ************************************** 
+        *  Relationships
+        *  ************************************** */
+
+        /// <summary>
+        /// List of photos that a category has
+        /// </summary>
+        public ICollection<Photography> ListOfPhotos { get; set; } = [];
     }
 }
