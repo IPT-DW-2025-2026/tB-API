@@ -22,6 +22,11 @@ namespace tB_Fotografias.Controllers.ApiOperations
             _context = context;
         }
 
+
+        /// <summary>
+        /// Alterar para não retornar diretamente o que está na base de dados, mas sim uma lista de DTOs
+        /// </summary>
+        /// <returns></returns>
         // GET: api/ApiCategories
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Category>>> GetCategories()
@@ -43,6 +48,11 @@ namespace tB_Fotografias.Controllers.ApiOperations
             return category;
         }
 
+
+        /// <summary>
+        /// Alterar para não receber diretamente o objeto Category, que é guardado diretamente na base de dados
+        /// </summary>
+        /// <returns></returns>
         // PUT: api/ApiCategories/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
