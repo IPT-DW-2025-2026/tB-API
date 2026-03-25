@@ -55,3 +55,6 @@ nunit-*.xml
 
 .vs/
 /.vs/slnx.sqlite
+
+.git/
+.github/
