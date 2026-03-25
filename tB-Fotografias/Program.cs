@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using tB_Fotografias.Data;
+using tB_Fotografias.Data.Seed;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -31,6 +32,9 @@ if (app.Environment.IsDevelopment())
     // add swagger UI
     app.UseSwagger();
     app.UseSwaggerUI();
+
+    // seed
+    app.UseItToSeedSqlServer();
 }
 else
 {

@@ -23,15 +23,55 @@ namespace tB_Fotografias.Controllers.ApiOperations
         }
 
 
-        /// <summary>
-        /// Alterar para não retornar diretamente o que está na base de dados, mas sim uma lista de DTOs
-        /// </summary>
-        /// <returns></returns>
-        // GET: api/ApiCategories
+        /// <summary>/// Alterar para não retornar diretamente o que está na base de dados, mas sim uma lista de DTOs/// </summary>/// <returns></returns>// GET: api/ApiCategories
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Category>>> GetCategories()
+        public async Task<ActionResult<IEnumerable<CategoryDto>>> GetCategories()
         {
-            return await _context.Categories.ToListAsync();
+            var listCategories = await _context.Categories
+
+                .Include(c => c.ListOfPhotos).ToListAsync();
+
+
+            // lista de categories DTO que vai ser retornada pela API
+            var listCategoriesDto = new List<CategoryDto>();
+
+
+            // converter cada categories da BD para um photo DTO e adicionar à lista de categories DTO
+            foreach (var category in listCategories)
+            {
+                var categoryDto = new CategoryDto()
+                {
+                    Name = category.Name,
+
+                };
+
+
+
+                foreach (var photo in category.ListOfPhotos)
+                {
+                    var photoDto = new PhotosDto()
+                    {
+                        Title = photo.Title,
+
+                        File = photo.File,
+
+                    };
+
+                    categoryDto.Photos.Add(photoDto);
+
+                }
+                listCategoriesDto.Add(categoryDto);
+
+            }
+            return listCategoriesDto;
+
+        }
+        [Route("test")]
+        [HttpGet]
+        public async Task<ActionResult> TestRoute([FromQuery] int id)
+        {
+            return Ok("Rota de teste a funcionar com id: " + id);
+
         }
 
         // GET: api/ApiCategories/5
@@ -91,7 +131,7 @@ namespace tB_Fotografias.Controllers.ApiOperations
         {
             // validar se a categoria já existe
             var categoriaExists = _context.Categories.FirstOrDefault(c => c.Name.Equals(category.Name));
-            if(categoriaExists != null)
+            if (categoriaExists != null)
             {
                 return BadRequest("Categoria com este Name já existe");
             }
